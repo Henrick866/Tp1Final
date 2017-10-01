@@ -32,7 +32,7 @@ namespace Tp1Secu
                             AddPass(db, NewPassword, Tag, UserId);
                         }
                         else{
-                            Console.WriteLine("ERROR : Acces refusé");
+                            Console.WriteLine("ERROR");
                         }
                     break;
 
@@ -45,7 +45,7 @@ namespace Tp1Secu
                             GetPass(db, Tag, UserId);
                         }
                         else{
-                            Console.WriteLine("ERROR : Acces refusé");
+                            Console.WriteLine("ERROR");
                         }
                     break;
                     case "-d": 
@@ -57,7 +57,7 @@ namespace Tp1Secu
                             SuppPass(db, Tag);
                         }
                         else{
-                            Console.WriteLine("ERROR : Acces refusé");
+                            Console.WriteLine("ERROR");
                         }
                     break;
                     case "-t": 
@@ -74,11 +74,11 @@ namespace Tp1Secu
                             Console.WriteLine(PassByTag);
                         }
                         else{
-                            Console.WriteLine("ERROR : Trop d'arguments");
+                            Console.WriteLine("ERROR");
                         }
                     break;
                     default: 
-                        Console.WriteLine("ERROR : Commande {0} non-reconnue", args[0]);
+                        Console.WriteLine("ERROR");
                     break;
 
                 }
@@ -123,7 +123,7 @@ namespace Tp1Secu
                     Console.WriteLine("OK");
                 }
                 else{
-                    Console.WriteLine("ERROR : USERNAME deja utilise");
+                    Console.WriteLine("ERROR");
                 }
             }
 
@@ -132,7 +132,7 @@ namespace Tp1Secu
             byte[] UserSalt = Convert.FromBase64String(database.Users.Find(UserId).UserSalt);
             string Pass = SearchPassWord(database, NewTag);
             if (Pass != ""){
-                Console.WriteLine("ERROR : Le Tag est deja utilise. veuillez en choisir un autre");
+                Console.WriteLine("ERROR");
             }
             else{
                 string Key = GenerateKey(NewPass, UserSalt);
@@ -153,7 +153,7 @@ namespace Tp1Secu
                 Console.WriteLine(PassWordDecrypt);
                 }
                 else{
-                    Console.WriteLine("ERROR : TAG non reconnu");
+                    Console.WriteLine("ERROR");
                 }
         }
 
@@ -163,7 +163,7 @@ namespace Tp1Secu
                     return User.UserSalt + ":" + User.UserPassword;
                 }
             }
-            return "ERROR : USERNAME non reconnu";
+            return "ERROR";
         }
         static string SearchUser(DatabaseContext database, string UserLogin){
             foreach (var User in database.Users){
@@ -183,7 +183,7 @@ namespace Tp1Secu
                     return Tag.Password;
                 }
             }
-            return "ERROR : TAG non reconnu";
+            return "ERROR";
         }
 
         static string GenerateKey(string Pass, byte[] UserSalt){
@@ -205,7 +205,7 @@ namespace Tp1Secu
                 }
                 Console.WriteLine("OK");
             }else{
-                Console.WriteLine("ERROR : Tag non reconnu");
+                Console.WriteLine("ERROR");
             }
         }
             static string SearchPassWord(DatabaseContext database, string Tag){
